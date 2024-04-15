@@ -1,0 +1,49 @@
+#include <Servo.h>
+Servo myservo;  
+int ledPin = 2;
+int servoPin = 9; 
+int ldrPin = A0; 
+int motorPin = 3; 
+int trigPin = 11;
+int echoPin = 12; 
+int potPin = A1; 
+int distance = 0; 
+int brightness = 0; 
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(servoPin, OUTPUT);
+  pinMode(motorPin, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+  myservo.attach(servoPin); 
+}
+void loop() {
+  int ldrValue = analogRead(ldrPin);
+  if (ldrValue < 500) {
+    digitalWrite(ledPin, HIGH); // turn the LED on
+  } else {
+    digitalWrite(ledPin, LOW); // turn the LED off
+  }
+  int potValue = analogRead(potPin);
+  int servoAngle = map(potValue, 0, 1023, 0, 180);
+  myservo.write(servoAngle); 
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance= duration*0.034/2;
+  if(distance < 10) {
+    analogWrite(motorPin, 255); // turn the motor on at full speed
+  } else {
+    analogWrite(motorPin, 0); // turn the motor off
+  }
+  brightness = analogRead(potPin);
+  brightness = map(brightness, 0, 1023, 0, 255);
+  Serial.print("Brightness: ");
+  Serial.println(brightness);
+  delay(1000); 
+}
+

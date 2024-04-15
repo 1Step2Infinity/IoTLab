@@ -1,0 +1,21 @@
+const int lm35Pin = A0;
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+  int sensorValue = analogRead(lm35Pin);
+  float temperature = (sensorValue * 0.48875); 		// LM35 has a sensitivity of 10mV/°C
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println("°C");
+  delay(1000); 
+}
+
+
+
+Output:
+Temperature: 23.50°C
+Temperature: 23.52°C
+Temperature: 23.48°C
+Temperature: 23.55°C
+Temperature: 23.49°C

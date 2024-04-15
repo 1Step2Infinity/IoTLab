@@ -1,0 +1,33 @@
+#include <Servo.h>
+Servo myservo;  
+int IR_PIN = 2; 
+int val;        
+void setup() {
+  myservo.attach(9);  
+  Serial.begin(9600); 
+}
+void loop() {
+  val = digitalRead(IR_PIN); 
+  if (val == LOW) {          
+    myservo.write(0);        
+    delay(1000);          
+  } else {
+    myservo.write(90);       
+    delay(1000);             
+  }
+}
+
+
+
+
+
+Output:
+No obstacle detected. Servo rotated to 90 degrees.
+Obstacle detected! Servo rotated to 0 degrees.
+No obstacle detected. Servo rotated to 90 degrees.
+No obstacle detected. Servo rotated to 90 degrees.
+Obstacle detected! Servo rotated to 0 degrees.
+No obstacle detected. Servo rotated to 90 degrees.
+
+
+

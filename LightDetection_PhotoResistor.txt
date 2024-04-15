@@ -1,0 +1,27 @@
+const int photoresistorPin = A0;
+void setup() {
+Serial.begin(9600);
+}
+void loop() {
+  int lightLevel = analogRead(photoresistorPin);
+  Serial.print("Light Level: ");
+  Serial.println(lightLevel);
+
+  delay(500);
+}
+
+
+
+
+Output:
+With Light On:
+Light Level: 712 
+Light Level: 689 
+Light Level: 654 
+Light Level: 630 
+
+With Light Off:
+Light Level: 30 
+Light Level: 27 
+Light Level: 25
+Light Level: 23
